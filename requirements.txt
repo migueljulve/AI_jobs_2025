@@ -1,7 +1,7 @@
 streamlit
 numpy
 pandas
-joblib
+joblib==1.5.2
 requests
 python-dotenv
 scikit-learn
