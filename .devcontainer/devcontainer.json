@@ -1,7 +1,8 @@
 {
-  "name": "Python 3",
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bookworm", 
+  "name": "Python 3 (Streamlit)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "customizations": {
     "codespaces": {
       "openFiles": [
@@ -17,10 +18,8 @@
       ]
     }
   },
-  "updateContentCommand": "[ -f packages.txt ] && sudo apt update && sudo apt upgrade -y && sudo xargs apt install -y <packages.txt; [ -f requirements.txt ] && pip3 install --user -r requirements.txt; pip3 install --user streamlit; echo '✅ Packages installed and Requirements met'",
-  "postAttachCommand": {
-    "server": "streamlit run app.py --server.enableCORS false --server.enableXsrfProtection false"
-  },
+  "updateContentCommand": "if [ -f packages.txt ] && [ -s packages.txt ]; then apt-get update && xargs -a packages.txt apt-get install -y; fi; if [ -f requirements.txt ] && [ -s requirements.txt ]; then pip3 install --user -r requirements.txt; fi",
+  "postAttachCommand": "streamlit run app.py --server.enableCORS false --server.enableXsrfProtection false",
   "portsAttributes": {
     "8501": {
       "label": "Application",
@@ -29,5 +28,7 @@
   },
   "forwardPorts": [
     8501
-  ]
+  ],
+  "runArgs": ["--init"],
+  "remoteUser": "vscode"
 }
