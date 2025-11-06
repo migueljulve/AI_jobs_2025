@@ -1,5 +1,5 @@
 # 1. Base Image: Usa una imagen oficial de Python, versión 3.10, más pequeña (slim)
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 # 2. Variables de Entorno: Configuración estándar para entornos Docker de Python
 # Previene la escritura de archivos .pyc
